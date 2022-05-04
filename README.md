@@ -187,6 +187,7 @@ Desarrollar el template de clase `fixed_stack` que permita implementar pilas de 
 
 y que cuenten con los siguientes métodos:
 
+- `fixed_stack(std::initializer_list lst)` constructor que permita copiar valores en la pila considerando como restricción la cantidad fija de valores aceptada por la pila, en caso `lst` tuviera más valores que los soportados por la pila esos valores serian descartados. 
 - `T top()` retorna el valor al tope de la pila
 - `pop()` remueve el valor del tope de la pila y actualiza el valor del tope.
 - `bool push(T Value)` agrega un nuevo valor a la pila, actualiza la posición del tope y retornar `true` si fue exitoso, se considera que NO es exitoso si se intenta ingresar un valor y se rebasa el tope máximo definido por el tamaño fijo de la pila.  
