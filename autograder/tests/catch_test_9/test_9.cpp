@@ -3,6 +3,9 @@
 //
 #include "catch.hpp"
 #include "redirect_io.h"
+#include <iterator>
+#include <vector>
+#include <utility>
 #include "p9.h"
 using namespace std;
 

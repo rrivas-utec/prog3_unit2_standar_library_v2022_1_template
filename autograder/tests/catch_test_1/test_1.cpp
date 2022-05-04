@@ -7,7 +7,8 @@
 #include <deque>
 #include <list>
 #include <forward_list>
-#include <algorithm>
+#include <iterator>
+
 using namespace std;
 
 static void test_1() {
@@ -39,11 +40,11 @@ static void test_3() {
 }
 
 TEST_CASE("Question #1_1") {
-    execute_test("test_1.in", test_1);
+    execute_test("test_1_1.in", test_1);
 }
 TEST_CASE("Question #1_2") {
-    execute_test("test_1.in", test_2);
+    execute_test("test_1_1.in", test_2);
 }
 TEST_CASE("Question #1_3") {
-    execute_test("test_1.in", test_3);
+    execute_test("test_1_1.in", test_3);
 }
