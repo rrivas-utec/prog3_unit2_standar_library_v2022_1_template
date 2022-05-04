@@ -10,7 +10,7 @@
 using namespace std;
 
 static void test_1() {
-    fixed_stack<int, 5> fs1 = {1, 2, 3, 4, 5};
+    fixed_stack<int, 5> fs1 {1, 2, 3, 4, 5};
     while (!fs1.empty()){
         cout << fs1.top() << " ";
         fs1.pop();
