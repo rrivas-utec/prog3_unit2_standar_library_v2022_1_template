@@ -198,8 +198,6 @@ Adicionalmente elaborar el template de clase `fixed_stack_pusher` amiga de la cl
 
 - `fixed_stack_pusher(fixed_stack<T, sz> stack)` constructor utilizado para que la clase `fixed_stack_pusher` acceda a los valores almacenados y al tope de la pila.
 
-- `fixed_stack_inserter& operator++()` que permita avanzar desde el primer elemento hacia adelante.
-
 - `fixed_stack_inserter& operator++()` y `fixed_stack_inserter<T, sz> operator++(int)` que permiten avanzar desde el primer elemento hacia adelante.
 
 - `fixed_stack_inserter& operator=(T value)` que permite realizar el `push` de un nuevo valor en la pila.
