@@ -5,28 +5,61 @@
 
 ## Instructions
 Subir a gradescope los siguientes archivos:
-- `P1.h` y `P1.cpp`
-- `P2.h` y `P2.cpp`
-- `P3.h` y `P3.cpp`
-- `P4.h` y `P4.cpp`
-- `P5.h` y `P5.cpp`
-- `P6.h` y `P6.cpp`
-- `P7.h` y `P7.cpp`
-- `P8.h` y `P8.cpp`
-- `P9.h` y `P9.cpp`
+- `p1.h`
+- `p2.h`
+- `p3.h`
+- `p4.h`
+- `p5.h`
+- `p6.h`
+- `p7.h`
+- `p8.h`
+- `p9.h`
 
 ## Question #1 - split_range (2 points)
 
 Generar una función template `split_range`, que reciba como parámetros un contenedor y un número `n` y permita dividir el contenedor en `n` contenedores, si el valor `n` no es múltiplo del tamaño del contenedor, los ítems restantes de la división deberán ser almacenados en el último contenedor. El resultado o valor de retorno deberá ser un contenedor que contenga los contenedores devueltos, siendo vector el contenedor por defecto, el template tendrá la posibilidad de personalizar en contenedor de resultado.
 
-**Use Case:**
+**Use Case #1:**
 ```cpp
-dequeue<int> v1 = {1, 2, 3, 4, 5, 6, 7};
-auto resultado = split_range(v1, 3};
+deque<int> d1 = {1, 2, 3, 4, 5, 6, 7};
+auto resultado = split_range(d1, 3};
     // resultado[0] = {1, 2};
     // resultado[1] = {3, 4};
     // resultado[2] = {5, 6, 7};
  ```
+
+**Use Case #2:**
+```cpp
+std::list<int> cnt{10, 20, 30, 40, 50, 60};
+auto res2 = split_range(cnt, 2);
+for (const auto& row : res2) {
+    std::cout << "|";
+    for (const auto& item : row)
+        std::cout << item << " ";
+}   // |10 20 30 |40 50 60
+```
+
+**Use Case #3:**
+```cpp
+std::vector<int> vec{};
+std::forward_list<int> cnt{std::begin(vec), std::end(vec)};
+auto res3 = split_range(cnt, 3);
+for (const auto& row : res3) {
+    std::cout << "|";
+    for (const auto& item : row)
+        std::cout << item << " ";
+}   // |10 20 |30 40 |50 60 70
+```
+
+**Use Case #4:**
+```cpp
+std::string all = "El mundo es ancho y ajeno";
+auto chunks = split_range(all, 5);
+for (const auto& part : chunks) {
+    std::cout << '|' << part;
+}   // |El mu|ndo e|s anc|ho y |ajeno
+```
+
 
 ## Question #2 - sum_range (2 points)
 
@@ -34,15 +67,40 @@ Escribir una función template `sum_range` que permita la suma de los valores de
 
 **Use Case #1:**
 ```cpp
-vector<int> v1 = {1, 3, 4};
-vector<int> v2 = {4, 5, 6};
-auto v3 = sum_range(v1, v2}; // {5, 8, 10}
+std::stringstream os;
+std::list<int> l1 = { 10, 20, 30, 40, 50, 60, 70 };
+std::list<int> l2 = { 4, 8 };
+auto res1 = sum_range(l1, l2);
+for (const auto& item : res1)
+    std::cout << item << " ";
+// 14 28 34 48 54 68 74
 ```
 **Use Case #2:**
 ```cpp
-list<int> v1 = {1, 2, 3, 4, 5};
-list<int> v2 = {10, 20};
-auto v3 = sum_range(v1, v2}; // {11, 22, 13, 24, 15}
+std::forward_list<int> fl1 = { 10, 20, 30, 40, 50, 60, 70, 80 };
+std::forward_list<int> fl2 = { 4, 8, 7};
+auto res2 = sum_range(fl1, fl2);
+for (const auto& item : res2)
+    std::cout << item << " ";
+// 14 28 37 44 58 67 74 88
+```
+**Use Case #3:**
+```cpp
+std::stringstream os;
+std::vector<int> l1 = { 10, 20, 30, 40, 50, 60, 70, 80, 100};
+std::vector<int> l2 = { 4, 8 };
+auto res1 = sum_range(l1, l2);
+for (const auto& item : res1)
+    std::cout << item << " ";
+// 14 28 34 48 54 68 74 88 104
+```
+**Use Case #4:**
+```cpp
+const std::deque<int> d1 = { 10, 20, 30, 40, 50, 60, 70, 80 };
+const std::deque<int> d2 = { 4, 8, 7};
+for (const auto res2 = sum_range(d1, d2); const auto& item : res2)
+    std::cout << item << " ";
+// 14 28 37 44 58 67 74 88
 ```
 ## Question #3 - delete_range (2 points)
 
@@ -50,12 +108,12 @@ Escribir una función template `delete_items` que permita eliminar un valor espe
 
 **Use Case #1:**
 ```cpp
-vector<int> v1 = {1, 3, 4, 1, 3, 2, 3, 4, 6, 5}; 
+std::vector<int> v1 = {1, 3, 4, 1, 3, 2, 3, 4, 6, 5}; 
 auto v3 = delete_range(v1, 1); // {3, 4, 3, 2, 3, 4, 6, 5}
 ```
 **Use Case #2:**
 ```cpp
-list<int> v1 = {1, 3, 4, 1, 3, 2, 3, 4, 6, 5}; 
+std::list<int> v1 = {1, 3, 4, 1, 3, 2, 3, 4, 6, 5}; 
 auto v3 = delete_range(v1, {1, 4});	 // {3, 3, 2, 3, 6, 5}
 ```
 
@@ -65,12 +123,12 @@ Escribir una función template `delete_duplicated` que permita eliminar todos lo
 
 **Use Case #1:**
 ```cpp
-vector<int> v1 = {1, 3, 4, 1, 3, 2, 3, 4, 6, 5}; 
+std::vector<int> v1 = {1, 3, 4, 1, 3, 2, 3, 4, 6, 5}; 
 auto v2 = delete_duplicated(v1);        // {1, 3, 4, 2, 6, 5}
 ```
 **Use Case #2:**
 ```cpp
-list<int> v3 = {1, 1, 1, 1, 3, 2, 2, 2, 2, 5}; 
+std::list<int> v3 = {1, 1, 1, 1, 3, 2, 2, 2, 2, 5}; 
 auto v4 = delete_duplicated(v3);	    // {1, 3, 2, 5}
 ```
 
@@ -97,7 +155,7 @@ print(id, name, last_name, height)
 
 Diseñar y desarrollar la función template `unpack` que permita desempaqueta los valores de una tupla en variables individuales.
 
-**Use Case:**
+**Use Case #1:**
 ```cpp
 std::tuple<int, string, string, double> tup1 = {1321, "Jose", "Perez", 1.68};
 int key; 
@@ -106,6 +164,20 @@ string last_name;
 double height;
 unpack(key, first_name, last_name, height) = t1;
 std::cout << key <<  " "<< first_name << last_name << height << endl;
+```
+
+**Use Case #2:**
+```cpp
+std::tuple<std::list<int>, std::string, char> t1 = { {1, 2, 3, 4}, "Texto2", 'A' };
+std::list<int> vec;
+std::string text2;
+char flag;
+unpack(vec, text2, flag) = t1;
+std::ranges::copy(vec, std::ostream_iterator<int>(std::cout, " "));
+// 1 2 3 4
+std::cout << std::endl;
+std::cout << text2 << " " << flag;
+// Texto2 A
 ```
 
 ## Question #6 - zip (2 points)
@@ -135,12 +207,12 @@ Escribir una función template `rotate_range` que permite rotar los valores de u
 
 **Use Case #1:**
 ```cpp
-vector<int> v1 = {1, 2, 3, 4, 5, 6}; 
+std::vector<int> v1 = {1, 2, 3, 4, 5, 6}; 
 auto v3 =rotate_range(v1, 2);   		// {5, 6, 1, 2, 3, 4}
 ```
 **Use Case #2:**
 ```cpp
-list<int> v1 = {10, 20, 30, 40, 50}; 
+std::list<int> v1 = {10, 20, 30, 40, 50}; 
 auto v3 = rotate_range(v1, -2);	 	// {30, 40, 50, 10, 20}
 ```
 
@@ -152,28 +224,28 @@ Escribir una función `filter_codes` que lea de un archivo una lista de códigos
 
 **Use Case #1:**
 ```cpp
-vector<string> codes = filter_codes('data.txt', 'c'); 
+std::vector<std::string> codes = filter_codes('data.txt', 'c'); 
     // Si el archivo data.txt tuviera los siguientes códigos: "cabd123", "abxz345", "cdbe546", "defz918"
     // codes almacenaría ordenadamente: "cabd123", "cdbe546"
 ```
 
 **Use Case #2:**
 ```cpp
-auto codes = filter_codes<list>('data.txt', 'c'); 
+auto codes = filter_codes<std::list>('data.txt', 'c'); 
     // Si el archivo data.txt tuviera los siguientes códigos: "cabd123", "abxz345", "cdbe546", "defz918"
     // codes almacenaría ordenadamente: "cabd123", "cdbe546"
 ```
 
 **Use Case #3:**
 ```cpp
-auto codes = filter_codes<deque>('data.txt', 'c'); 
+auto codes = filter_codes<std::deque>('data.txt', 'c'); 
     // Si el archivo data.txt tuviera los siguientes códigos: "cabd123", "abxz345", "cdbe546", "defz918"
     // codes almacenaría ordenadamente: "cabd123", "cdbe546"
 ```
 
 **Use Case #4:**
 ```cpp
-auto codes = filter_codes<forward_list>('data.txt', 'c'); 
+auto codes = filter_codes<std::forward_list>('data.txt', 'c'); 
     // Si el archivo data.txt tuviera los siguientes códigos: "cabd123", "abxz345", "cdbe546", "defz918"
     // codes almacenaría ordenadamente: "cabd123", "cdbe546"
 ```
@@ -208,7 +280,7 @@ Adicionalmente elaborar el template de clase `fixed_stack_pusher` amiga de la cl
 ```cpp
     fixed_stack<int, 5> fs1 = {1, 2, 3, 4, 5};
     while (!fs1.empty()){
-        cout << fs1.top() << " ";
+        std::cout << fs1.top() << " ";
         fs1.pop();
     }
     // 5 4 3 2 1
@@ -218,9 +290,9 @@ Adicionalmente elaborar el template de clase `fixed_stack_pusher` amiga de la cl
 ```cpp
     fixed_stack<int, 100> fs1;
     std::vector<float> vc1 = {1, 2, 3, 4, 5, 6, 7, 8};
-    copy(begin(vc1), end(vc1), fixed_stack_pusher(fs1));
+    std::copy(std::begin(vc1), std::end(vc1), fixed_stack_pusher(fs1));
     while (!fs1.empty()){
-        cout << fs1.top() << " ";
+        std::cout << fs1.top() << " ";
         fs1.pop();
     }
     // 8 7 6 5 4 3 2 1
@@ -255,19 +327,19 @@ Adicionalmente elaborar el template de clase `fixed_stack_pusher` amiga de la cl
 
 **Use Case #5:**
 ```cpp
-    fixed_stack<unique_ptr<pair<int, int>>, 7> fs1;
+    fixed_stack<std::unique_ptr<std::pair<int, int>>, 7> fs1;
     int n = 0;
-    cin >> n;
-    vector<pair<int, int>> vc1(n);
+    std::cin >> n;
+    std::vector<std::pair<int, int>> vc1(n);
     for (auto& item: vc1)
-        cin >> item.first >> item.second;
+        std::cin >> item.first >> item.second;
     
     for (auto& item: vc1)
-        if (!fs1.push(make_unique<pair<int, int>>(item)))
+        if (!fs1.push(std::make_unique<std::pair<int, int>>(item)))
             break;
     
     while (!fs1.empty()){
-        cout << fs1.top()->first << " " << fs1.top()->second << std::endl;
+        std::cout << fs1.top()->first << " " << fs1.top()->second << std::endl;
         fs1.pop();
     }
     // 5 4 3 2 1
